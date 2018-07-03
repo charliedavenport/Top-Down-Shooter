@@ -56,8 +56,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1893775026008516}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.000000029802, z: -7e-15}
-  m_LocalScale: {x: 33.71875, y: 13.999985, z: 20}
+  m_LocalPosition: {x: -0.00000095367, y: -0.000000029802, z: 1.422e-12}
+  m_LocalScale: {x: 52.11145, y: 21.636599, z: 30.90946}
   m_Children: []
   m_Father: {fileID: 4802068753195396}
   m_RootOrder: 0
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1133553017889964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: -1.6403612, y: 0.25, z: -1.5779568}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4698508999209526}
@@ -204,6 +204,7 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   projectilePrefab: {fileID: 1961769854059986, guid: 9451940fe156f7045817b8e9c617896a,
     type: 2}
+  rb: {fileID: 54457009347918484}
 --- !u!135 &135381785625135036
 SphereCollider:
   m_ObjectHideFlags: 1

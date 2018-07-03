@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
             for (int t = 0; t < nSteps; t++)
             {
                 projectile.transform.Translate(displacement.normalized * projectile.moveSpeed * Time.fixedDeltaTime);
-                projectile.transform.Translate(inheritedVelocity );
+                projectile.transform.Translate(inheritedVelocity * 0.5f); // only inherit half the player's velocity
                 yield return new WaitForFixedUpdate();
             }
             //*/
