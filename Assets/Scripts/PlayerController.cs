@@ -9,15 +9,22 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Rigidbody rb;
 
     private Vector2 inputAxes;
     private bool mouse0Down;
+
+    private Vector3 lastPos;
+    private Vector3 playerVel;
 
     private bool primaryFireOnCooldown;
 
     private void Awake()
     {
         primaryFireOnCooldown = false;
+        rb = GetComponent<Rigidbody>();
+
+        lastPos = transform.position;
     }
 
     private void Update()
@@ -34,9 +41,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        playerVel = transform.position - lastPos;
+        lastPos = transform.position;
+
         Vector3 movement = moveSpeed * Time.deltaTime * new Vector3(inputAxes.x, 0, inputAxes.y);
         transform.Translate(movement);
-
 
     }
 
@@ -55,6 +64,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("RayCast hit in PlayerRaycast LayerMask");
             Vector3 targetPos = new Vector3(hit.point.x, 0.25f, hit.point.z);
             var projectile = GameObject.Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+            Vector3 inheritedVelocity = playerVel; // projectile inherits player's velocity
             Vector3 displacement = targetPos - transform.position;
             float distance = displacement.magnitude;
             //* okay, this one kind of works, but it buggy. sometimes the player rigidbody's velocity gets set to something weird
@@ -62,6 +72,7 @@ public class PlayerController : MonoBehaviour
             for (int t = 0; t < nSteps; t++)
             {
                 projectile.transform.Translate(displacement.normalized * projectile.moveSpeed * Time.fixedDeltaTime);
+                projectile.transform.Translate(inheritedVelocity );
                 yield return new WaitForFixedUpdate();
             }
             //*/
