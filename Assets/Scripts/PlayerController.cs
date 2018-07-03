@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     public float moveSpeed = 0.5f;
 
@@ -49,15 +50,16 @@ public class PlayerController : MonoBehaviour {
     {
         RaycastHit hit;
         int layerMask = 1 << 9; // playerRaycast layer
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
             Debug.Log("RayCast hit in PlayerRaycast LayerMask");
-            Vector3 targetPos = hit.point;
+            Vector3 targetPos = new Vector3(hit.point.x, 0.25f, hit.point.z);
             var projectile = GameObject.Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
             Vector3 displacement = targetPos - transform.position;
             float distance = displacement.magnitude;
             //* okay, this one kind of works, but it buggy. sometimes the player rigidbody's velocity gets set to something weird
             int nSteps = Mathf.CeilToInt(distance / (projectile.moveSpeed * Time.fixedDeltaTime));
-            for (int t=0; t< nSteps; t++)
+            for (int t = 0; t < nSteps; t++)
             {
                 projectile.transform.Translate(displacement.normalized * projectile.moveSpeed * Time.fixedDeltaTime);
                 yield return new WaitForFixedUpdate();

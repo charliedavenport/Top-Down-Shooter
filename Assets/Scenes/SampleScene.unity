@@ -338,37 +338,6 @@ Prefab:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 100709429}
-    - target: {fileID: 23872405812350278, guid: ad85c960b2670d647b5da1bf201acf29,
-        type: 2}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114425175912039084, guid: ad85c960b2670d647b5da1bf201acf29,
-        type: 2}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 1961769854059986, guid: 9451940fe156f7045817b8e9c617896a,
-        type: 2}
-    - target: {fileID: 64040566991545766, guid: ad85c960b2670d647b5da1bf201acf29,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54457009347918484, guid: ad85c960b2670d647b5da1bf201acf29,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 54457009347918484, guid: ad85c960b2670d647b5da1bf201acf29,
-        type: 2}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54457009347918484, guid: ad85c960b2670d647b5da1bf201acf29,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad85c960b2670d647b5da1bf201acf29, type: 2}
   m_IsPrefabParent: 0
