@@ -17,8 +17,11 @@ public class CameraController : MonoBehaviour {
 
     private void Update()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+        if (cam != null)
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.green);
+        }
     }
 
     private void LateUpdate()

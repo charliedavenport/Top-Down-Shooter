@@ -7,8 +7,12 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 0.5f;
 
+    public Texture2D cursorTexture;
+    public Vector2 hotSpot = Vector2.zero;
+
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private Rigidbody rb;
 
     private Vector2 inputAxes;
@@ -18,6 +22,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVel;
 
     private bool primaryFireOnCooldown;
+
+    private void OnMouseEnter()
+    {
+        Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.Auto);
+    }
 
     private void Awake()
     {
@@ -35,7 +44,7 @@ public class PlayerController : MonoBehaviour
         { // cast ray to fire weapon
             Ray ray = cameraController.cam.ScreenPointToRay(Input.mousePosition);
             StartCoroutine(doPrimaryFire(ray));
-            StartCoroutine(doPrimaryFireCooldown());
+            StartCoroutine(doPrimaryFireCooldown(0.2f));
         }
     }
 
@@ -77,20 +86,39 @@ public class PlayerController : MonoBehaviour
             }
             //*/
 
-
             /* I thought this would work more simply, but for some reason, it doesn't.
             projectile.rb.velocity = displacement.normalized * projectile.moveSpeed * Time.fixedDeltaTime;
             yield return new WaitForSeconds(projectile.lifeTime);
             //*/
+
+            // add explosion
+            var explosion = GameObject.Instantiate(explosionPrefab, targetPos, Quaternion.identity);
+            // delete projectile
             GameObject.Destroy(projectile.gameObject);
+
+            // add explosion force to nearby objects tagged with "Explodable"
+            Vector3 explosionCenter = targetPos;
+            float explosionRadius = explosion.GetComponent<SphereCollider>().radius;
+            float explosionForce = 250.0f;
+            Collider[] colliders = Physics.OverlapSphere(explosionCenter, explosionRadius);
+            foreach(Collider hitCollider in colliders)
+            {
+                Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddExplosionForce(explosionForce, explosionCenter, explosionRadius, 5.0f);
+                }
+            }
+            yield return new WaitForSeconds(0.1f);
+            GameObject.Destroy(explosion);
         }
-        yield return null;
+        yield return null;   
     }
 
-    IEnumerator doPrimaryFireCooldown()
+    IEnumerator doPrimaryFireCooldown(float seconds)
     {
         primaryFireOnCooldown = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(seconds);
         primaryFireOnCooldown = false;
         yield return null;
     }

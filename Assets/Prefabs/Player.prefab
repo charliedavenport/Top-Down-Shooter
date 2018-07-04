@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1133553017889964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6403612, y: 0.25, z: -1.5779568}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4698508999209526}
@@ -201,8 +201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  cursorTexture: {fileID: 2800000, guid: f5959af4727019f4da5b34c566d162ba, type: 3}
+  hotSpot: {x: 0, y: 0}
   cameraController: {fileID: 0}
   projectilePrefab: {fileID: 1961769854059986, guid: 9451940fe156f7045817b8e9c617896a,
+    type: 2}
+  explosionPrefab: {fileID: 1678900305900986, guid: 26b2a4b52bf6ddc419b1cd4e1b5ed245,
     type: 2}
   rb: {fileID: 54457009347918484}
 --- !u!135 &135381785625135036
